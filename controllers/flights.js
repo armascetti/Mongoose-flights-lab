@@ -19,18 +19,18 @@ function index(req, res) {
 }
 
 function create(req, res) {
-  for (let key in req.body){
+  console.log("This is the body", req.body)
+  for (let key in req.body) {
     if (req.body[key] === "") {
       delete req.body[key]
     }
+}
+Flight.create(req.body, function(error, flight){
+  if(error){
+    return res.redirect('flights/new')
   }
-  const flight = new Flight(req.body)
-  flight.save(function (err) {
-    if (err) {
-      res.redirect('/flights/new')
-    }
-    res.redirect('/flights')
-  })
+  res.redirect('/flights')
+})
 }
 
 
