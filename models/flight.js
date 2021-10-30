@@ -11,12 +11,12 @@ const flightSchema = new Schema ({
     type: String, 
     enum: ['AUS', 'DFW', 'DEN', 'LAX', 'SAN']
   },
-  flightNo:{
+  flightNumber:{
   type: Number, 
   min: 10,
   max: 9999,
 },
-  departs: Date, 
+  departureTime: Date, 
 })
 
 //Compile the new Schema into a model and export it

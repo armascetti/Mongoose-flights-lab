@@ -18,6 +18,15 @@ function index(req, res) {
   })
 }
 
+function show(req, res){
+  Flight.findById(req.params.id, function(err, flight){
+    res.render('flights/show', {
+      title: `${flight.airline}'s Details`,
+      flight,
+    })
+  })
+}
+
 function create(req, res) {
   console.log("This is the body", req.body)
   for (let key in req.body) {
@@ -34,9 +43,9 @@ Flight.create(req.body, function(error, flight){
 }
 
 
-
 export {
   newFlight as new,
   index,
   create,
+  show,
 }
