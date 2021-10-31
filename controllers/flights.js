@@ -2,16 +2,19 @@
 import { Flight } from '../models/flight.js'
 
 function newFlight(req, res) {
-  res.render('flights/new')
+  res.render('flights/new', {
+    title: "Add Flight",
+  })
 }
 
 function index(req, res) {
   let dateTime = new Date()
   let date = ""
-  Flight.find({}, function (error, flights) {
+  Flight.find({}, function (error, flight) {
     res.render('flights/index', {
-      flights,
+      flight,
       error,
+      title: "All Flights",
       time: date.concat(dateTime.getMonth(), "/", dateTime.getDate(), '/', dateTime.getFullYear())
     })
   })
