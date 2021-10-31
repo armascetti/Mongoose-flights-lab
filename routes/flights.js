@@ -14,8 +14,8 @@ router.get('/:id', flightsCtrl.show)
 
 //localhost:3000/flights -POST
 router.post('/', flightsCtrl.create)
-
-
+//localhost:3000/flights/:id/ticket
+router.post('/:id/tickets', flightsCtrl.createTicket)
 
 
 

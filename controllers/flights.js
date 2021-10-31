@@ -12,14 +12,13 @@ function index(req, res) {
     res.render('flights/index', {
       flights,
       error,
-      title: 'All Flights',
       time: date.concat(dateTime.getMonth(), "/", dateTime.getDate(), '/', dateTime.getFullYear())
     })
   })
 }
 
-function show(req, res){
-  Flight.findById(req.params.id, function(err, flight){
+function show(req, res) {
+  Flight.findById(req.params.id, function (err, flight) {
     res.render('flights/show', {
       title: `${flight.airline} Airline Details`,
       flight,
@@ -33,19 +32,29 @@ function create(req, res) {
     if (req.body[key] === "") {
       delete req.body[key]
     }
-}
-Flight.create(req.body, function(error, flight){
-  if(error){
-    return res.redirect('flights/new')
   }
-  res.redirect('/flights')
-})
+  Flight.create(req.body, function (error, flight) {
+    if (error) {
+      return res.redirect('flights/new')
+    }
+    res.redirect('/flights')
+  })
 }
 
+function createTicket(req, res) {
+  Flight.findById(req.params.id, function (error, flight) {
+    console.log("Here it is:", req.params.id)
+    flight.tickets.push(req.body)
+    flight.save(function(err){
+      res.redirect(`/flights/${flight._id}`)
+    })
+  })
+}
 
 export {
   newFlight as new,
   index,
   create,
   show,
+  createTicket,
 }

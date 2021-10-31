@@ -22,5 +22,35 @@
     <div><%= flight.departureTime%>
     </div><br>
   </section>
+  <form
+  id="add-ticket-form"
+  action="/flights/<%= flight._id %>/tickets"
+  method="POST"
+  >
+  <h2> Pick a Seat:</h2>
+  <input name="seat" required pattern="[A-F][1-9]\d?">
+  <h2>Ticket Price: </h2>
+  <input type="text" name="price">
+  <button type="submit"> Buy Ticket </button>
+  <% if (flight.tickets.length){ %>
+ <table>
+<thead>
+  <tr>
+    <th>Seat Number: </th>
+    <th>Ticket Price: </th>
+  </tr>
+</thead>
+<tbody>
+  <%flight.tickets.forEach(function(t){ %>
+<tr>
+  <td><%= t.seat %></td>
+  <td><%=t.price %></td>
+</tr>
+ <% }) %>
+</tbody>
+ </table>
+<% } else { %>
+<h3> No Tickets Purchased Yet</h3>
+<% } %>
 </body>
 </html>
