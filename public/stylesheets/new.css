@@ -1,0 +1,7 @@
+body{
+  padding: 50px;
+  background: radial-gradient(#ffff99 -10%, #ccccff 51%);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}

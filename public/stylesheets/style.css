@@ -1,8 +1,12 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background: radial-gradient( #00ccff -10%, #ccccff 51%);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 }
 
 a {
-  color: #00B7FF;
+  color: #394141;
 }
