@@ -5,6 +5,7 @@ import path from 'path'
 import { fileURLToPath } from 'url'
 import cookieParser from 'cookie-parser'
 import logger from 'morgan'
+import methodOverride from 'method-override'
 
 
 //Connect to the database with Mongoose 
@@ -37,6 +38,7 @@ app.use(
 )
 
 // mounted routers
+app.use(methodOverride('_method'))
 //localhost:3000 
 app.use('/', indexRouter)
 //localhost:3000/flights
