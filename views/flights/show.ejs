@@ -20,9 +20,9 @@
       action="/flights/<%= flight._id %>/tickets"
       method="POST"
       >
-      <h2> Pick a Seat: (A-F) and (1-9) only:</h2>
+      <h3> Pick a Seat: (A-F) and (1-9) only:</h3>
       <input name="seat" required pattern="[A-F][1-9]\d?">
-      <h2>Ticket Price: </h2>
+      <h3>Ticket Price: </h3>
       <input type="text" name="price">
       <button type="submit"> Buy Ticket </button>
       <% if (flight.tickets.length){ %>

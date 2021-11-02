@@ -4,7 +4,7 @@ function newDestination (req, res){
   Destination.find({}, function (err, destinations){
     res.render('destinations/new', {
       title: 'Add Destination',
-      destinations: destinations,
+      destinations
     })
   })
 }
