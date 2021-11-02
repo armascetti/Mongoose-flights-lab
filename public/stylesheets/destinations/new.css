@@ -29,15 +29,3 @@ background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 
 a {
   color: #f0f8f8;
 }
-
-body > nav {
-  grid-area: nav;
-  background-color:thistle;
-  list-style-type: none;
-  margin: 0;
-  padding: 0; 
-}
-
-.fas::before {
-  font-family: "Font Awesome 5 Free";
-}

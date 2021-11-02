@@ -46,19 +46,21 @@ function create(req, res) {
 
 function createTicket(req, res) {
   Flight.findById(req.params.id, function (error, flight) {
-    console.log("Here it is:", req.params.id)
+    console.log("here is the id:", req.params.id)
     flight.tickets.push(req.body)
-    flight.save(function(err){
+    flight.save(function (err) {
       res.redirect(`/flights/${flight._id}`)
     })
   })
 }
 
-function deleteFlight(req, res){
-  Flight.findByIdAndDelete(req.params.id, function(err, flight){
+function deleteFlight(req, res) {
+  Flight.findByIdAndDelete(req.params.id, function (err, flight) {
     res.redirect('/flights')
   })
 }
+
+
 
 export {
   newFlight as new,
