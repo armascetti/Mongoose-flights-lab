@@ -3,7 +3,9 @@ import mongoose from "mongoose"
 const Schema = mongoose.Schema 
 
 const destinationSchema = new Schema ({
-  place: {type: String, required: true, unique: true},
+  airport: {
+    type: String,
+  }
 }, {
   timestamps: true
 })

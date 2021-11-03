@@ -1,7 +1,9 @@
 <%- include ("../partials/html-head") %>
   <%- include("../partials/nav") %>
     <main>
-      <h1><%= title %></h1>
+      <h1>
+        <%= title %>
+      </h1>
       <section>
         <div> Airport: </div>
         <div>
@@ -12,39 +14,50 @@
           <%= flight.flightNumber%>
         </div><br>
         <div> Departs: </div>
-        <div><%= flight.departureTime%>
+        <div>
+          <%= flight.departureTime%>
         </div><br>
+        <div>Destinations: </div>
+        <ul>
+          <%- flight.destinations.map(d=>`<li>${d.airport}</li>`).join('') %>
+        </ul>
       </section>
-      <form
-      id="add-ticket-form"
-      action="/flights/<%= flight._id %>/tickets"
-      method="POST"
-      >
-      <h3> Pick a Seat: (A-F) and (1-9) only:</h3>
-      <input name="seat" required pattern="[A-F][1-9]\d?">
-      <h3>Ticket Price: </h3>
-      <input type="text" name="price">
-      <button type="submit"> Buy Ticket </button>
+      <form id="add-destination" action="/flights/<%= flight._id%>/destinations" method="POST">
+        <select name="destinationId">
+          <%- destinations.map(d=> `<option value="${d._id}">${d.airport}</option>`).join('')%>
+        </select>
+        <button type="submit">Add Destination</button>
+      </form>
+      <form id="add-ticket-form" action="/flights/<%= flight._id %>/tickets" method="POST">
+        <h3> Pick a Seat: (A-F) and (1-9) only:</h3>
+        <input name="seat" required pattern="[A-F][1-9]\d?">
+        <h3>Ticket Price: </h3>
+        <input type="text" name="price">
+        <button type="submit"> Buy Ticket </button>
+      </form>
       <% if (flight.tickets.length){ %>
-     <table>
-    <thead>
-      <tr>
-        <th>Seat Number: </th>
-        <th>Ticket Price: </th>
-      </tr>
-    </thead>
-    <tbody>
-      <%flight.tickets.forEach(function(t){ %>
-    <tr>
-      <td><%= t.seat %></td>
-      <td><%=t.price %></td>
-    </tr>
-     <% }) %>
-    </tbody>
-     </table>
-    <% } else { %>
-    <h3> No Tickets Purchased Yet</h3>
-    <% } %>
-    </body>
+        <table>
+          <thead>
+            <tr>
+              <th>Seat Number: </th>
+              <th>Ticket Price: </th>
+            </tr>
+          </thead>
+          <tbody>
+            <%flight.tickets.forEach(function(t){ %>
+              <tr>
+                <td>
+                  <%= t.seat %>
+                </td>
+                <td>
+                  <%=t.price %>
+                </td>
+              </tr>
+              <% }) %>
+          </tbody>
+        </table>
+        <% } else { %>
+          <h3> No Tickets Purchased Yet</h3>
+          <% } %>
     </main>
     <%- include("../partials/footer") %>

@@ -16,10 +16,12 @@ match: /[A-F][1-9]\d?/,
 const flightSchema = new Schema ({
   airline: {
     type: String, 
+    default: 'American',
     enum: ['American', 'SouthWest', 'United']
   },
   airport: {
     type: String, 
+    default: 'AUS',
     enum: ['AUS', 'DFW', 'DEN', 'LAX', 'SAN']
   },
   flightNumber:{
@@ -29,6 +31,9 @@ const flightSchema = new Schema ({
 },
   departureTime: Date, 
   tickets: [ticketSchema],
+  destinations:[{
+    type: Schema.Types.ObjectId, ref: "Destination"
+  }]
 })
 
 //Compile the new Schema into a model and export it
