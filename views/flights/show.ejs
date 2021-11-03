@@ -22,13 +22,21 @@
           <%- flight.destinations.map(d=>`<li>${d.airport}</li>`).join('') %>
         </ul>
       </section>
-      <form id="add-destination" action="/flights/<%= flight._id%>/destinations" method="POST">
+      <form 
+      id="add-destination" 
+      action="/flights/<%= flight._id%>/destinations" 
+      method="POST"
+      >
         <select name="destinationId">
           <%- destinations.map(d=> `<option value="${d._id}">${d.airport}</option>`).join('')%>
         </select>
         <button type="submit">Add Destination</button>
       </form>
-      <form id="add-ticket-form" action="/flights/<%= flight._id %>/tickets" method="POST">
+      <form
+       id="add-ticket-form" 
+       action="/flights/<%= flight._id %>/tickets" 
+       method="POST"
+       >
         <h3> Pick a Seat: (A-F) and (1-9) only:</h3>
         <input name="seat" required pattern="[A-F][1-9]\d?">
         <h3>Ticket Price: </h3>

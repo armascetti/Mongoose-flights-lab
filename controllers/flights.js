@@ -25,15 +25,16 @@ function index(req, res) {
 
 function show(req, res) {
   Flight.findById(req.params.id)
-  .populate('destinations').exec(function (err, flight) {
-    Destination.find({_id: {$nin:flight.destinations}}, function(err, destinations){
-      res.render('flights/show', {
-        title: `${flight.airline} Airline Details`,
-        flight,
-        destinations,
+    .populate('destinations')
+    .exec(function (err, flight) {
+      Destination.find({ _id: { $nin: flight.destinations}}, function (err, destinations) {
+        res.render('flights/show', {
+          title: `${flight.airline} Airline Details`,
+          flight,
+          destinations: destinations,
+        })
+      })
     })
-    })
-  })
 }
 
 function create(req, res) {
@@ -67,10 +68,10 @@ function deleteFlight(req, res) {
   })
 }
 
-function addToDestinations(req, res){
-  Flight.find(req,params.id, function(err, flight){
-    flight.destination.push(req.body.destinationId)
-    flight.save(function(err){
+function addToDestinations(req, res) {
+  Flight.find(req, params.id, function (err, flight) {
+    flight.destinations.push(req.body.destinationId)
+    flight.save(function (err) {
       res.redirect(`/flights/${flight._id}`)
     })
   })
