@@ -2,7 +2,7 @@
 import { Flight } from '../models/flight.js'
 //Importing the Destination model 
 import { Destination } from '../models/destination.js'
-
+import { flightsApi, googleMapsApi } from '../config/apis'
 
 function newFlight(req, res) {
   res.render('flights/new', {
@@ -44,10 +44,36 @@ function create(req, res) {
       delete req.body[key]
     }
   }
-  Flight.create(req.body, function (error, flight) {
-    if (error) {
-      return res.redirect('flights/new')
-    }
+
+  // TODO: Use the new FlightsAPI instead of accessing
+  //  the Mongo DB directly:
+  // Flight.create(req.body, function (error, flight) {
+  //   if (error) {
+  //     return res.redirect('flights/new')
+  //   }
+
+  // NOTE: This is a POST request, so you can send the request
+  //  info in 3 parts:
+  //  path params (req.params): maybe a 'flight ID'?
+  //  query params (req.query): maybe 'from from DFW to SEA on Mondays at 3:38pm'?
+  //  body (req.body): All the guts you see below (should be similar to the Mongo schema for 'flights'):
+    return flightsApi.post('/flight', {
+      airline: {},
+      airport: {},
+      flightNumber: //...
+    })
+
+
+    .then(function (response) {
+      const result = response.data.whateverMemeGeneratorSentYou;
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    })
+
+
+
     res.redirect('/flights')
   })
 }
